@@ -1,0 +1,59 @@
+<!-- https://docs.djangoproject.com/en/4.2/intro/tutorial03/ -->
+
+{% extends 'base.html' %}
+
+{% load custom_filters %}
+
+{% block content %}
+    <div class="container heading-container">
+        <h2 align="center">Books</h2>
+        <div class="table-responsive">
+            <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Details</th>
+                    {% if user.is_superuser %}
+                        <th>Update</th>
+                        <th>Borrowed by</th>
+                    {% else %}
+                        <th>Borrow/Return</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for object in object_list %}
+                <tr>
+                    <td>{{ object.title }}</td>
+                    <td>{{ object.author }}</td>
+                    <td>{{ object.isbn }}</td>
+                    <td><a href="{% url 'library:details' pk=object.pk %}" class="btn btn-outline-primary">Details</a></td>
+                    {% if user.is_superuser %}
+                        <td><a href="{% url 'library:update' pk=object.pk %}" class="btn btn-outline-primary">Update</a></td>
+                    {% endif %}
+                    {% if object.id in book_status %}
+                        {% for key, value in book_status.items %}
+                            {% if user.is_superuser and key == object.id %}
+                                <td>{{ value.1 }}</td>
+                            {% else %}
+                                {% if key == object.id and value.0 == 'Return' %}
+                                <td><a href="{% url 'library:borrow' pk=object.pk %}" class="btn btn-outline-warning">Return</a></td>
+                                {% elif key == object.id and value.0 == 'Unavailable' %}
+                                    <td><button class="btn btn-outline-secondary" disabled>Unavailable</button></td>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% elif not user.is_superuser %}
+                            <td><a href="{% url 'library:borrow' pk=object.pk %}" class="btn btn-outline-primary">Borrow</a></td>
+                    {% endif %}
+                {% empty %}
+                    <p>No objects yet.</p>
+                {% endfor %}
+                </tr>
+            </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

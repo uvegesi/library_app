@@ -1,0 +1,34 @@
+# Ignore virtual environment files (if using virtualenv or venv)
+env_django/
+venv/
+.env
+
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore log files
+*.log
+
+# Ignore the media and static files (you should configure a separate server or storage for these)
+media/
+static/
+
+# Ignore your local settings
+local_settings.py
+
+# Ignore IDE-specific settings files
+.vscode/
+.idea/
+
+# Ignore backup and temporary files
+*.bak
+*.swp
+*.swo
+*.swn
+*~

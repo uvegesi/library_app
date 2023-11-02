@@ -1,0 +1,22 @@
+# Ignore database files
+db.sqlite3
+
+# Ignore media files (user-uploaded content)
+media/
+
+# Ignore static files (collected static files)
+static/
+
+# Ignore environment-specific settings
+.env
+
+# Ignore virtual environment directory
+env_django/
+
+# Ignore compiled Python files
+*.pyc
+__pycache/
+
+# Ignore IDE-specific files (e.g., VSCode or PyCharm)
+.vscode/
+.idea/

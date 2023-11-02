@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container heading-container">
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>ISBN</th>
+                    <th>Distributor</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ object.title }}</td>
+                    <td>{{ object.author }}</td>
+                    <td>{{ object.isbn }}</td>
+                    <td>{{ object.distributor }}</td>
+                    <td>{{ object.year }}</td>
+                    <td>{{ object.genre }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'library:list' %}" class="btn btn-outline-primary shadow shadow-5-strong">Back</a>
+    </div>
+</div>
+{% endblock %}
